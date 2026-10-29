@@ -1,6 +1,6 @@
 use std::{env, fs, sync::Arc};
 
-use crate::fmgr;
+use crate::{execruntime, fmgr};
 use std::path;
 
 #[derive(PartialEq, Clone)]
@@ -27,6 +27,7 @@ pub struct Main {
     new_path: String,
     new_file_name: String,
     ff: bool,
+    async_runner: execruntime::Runners,
 }
 
 impl Default for Main {
@@ -41,6 +42,7 @@ impl Default for Main {
             new_path: String::new(),
             new_file_name: String::new(),
             ff: true,
+            async_runner: execruntime::Runners::new(),
         }
     }
 }
@@ -181,6 +183,9 @@ impl Main {
                             self.selected_file = None;
                         }
                         self.update_list();
+                    }
+                    if ui.button("Execute").clicked() {
+                        self.async_runner.spawn_bin(&current_path);
                     }
                 });
             }
