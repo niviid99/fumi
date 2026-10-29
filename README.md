@@ -1,6 +1,6 @@
 # FUMI file manager (FMUI)
 
-![scr.png](scr.png)
+![scr.png](media/scr.png)
 
 ### Build
 ```
